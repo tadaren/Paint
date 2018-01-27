@@ -44,9 +44,7 @@ public class PenManager {
 		JMenu penSizeMenu = new JMenu("PenSize");
 		JSpinner penSize = new JSpinner(new SpinnerNumberModel(5, 1, 100, 1));
 		penSize.setPreferredSize(new Dimension(50, 30));
-		penSize.addChangeListener(e -> {
-			setStroke(new BasicStroke(((Integer)((JSpinner)e.getSource()).getValue()).intValue(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
-		});
+		penSize.addChangeListener(e -> setStroke(new BasicStroke((Integer) ((JSpinner) e.getSource()).getValue(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)));
 		penSizeMenu.add(penSize);
 		MainManager.getInstance().getOptionMenuBar().add(penSizeMenu);
 

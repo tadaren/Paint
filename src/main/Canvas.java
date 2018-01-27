@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 
 public class Canvas extends JPanel{
 //	private BufferedImage image;	// 描画イメージを保持する
-	private LayerManager layer;
+	private LayerManager layer = new LayerManager();
 
 	public Canvas(){
 		this.setBackground(new Color(111,111,111));
@@ -29,11 +29,10 @@ public class Canvas extends JPanel{
 		return layer.getCurrentLayer().getImage();
 	}
 	public void generate(int width, int height){
-		layer = new LayerManager(width, height);
-		layer.addLayer(Color.WHITE);
+		layer.addLayer(width, height, Color.WHITE);
 	}
 	public void setImage(BufferedImage image){
-		layer = new LayerManager(image);
+		layer.addImage(image);
 	}
 
 //	public void setImage(BufferedImage image){
@@ -48,10 +47,10 @@ public class Canvas extends JPanel{
 	@Override
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);
-		if(layer == null){
+		BufferedImage buf = layer.getImage();
+		if(buf == null){
 			return;
 		}
-		BufferedImage buf = layer.getImage();
 		g.drawImage(buf, 0, 0, buf.getWidth(), buf.getHeight(), this);
 	}
 
