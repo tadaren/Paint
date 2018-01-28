@@ -13,7 +13,7 @@ public class Main {
 			splitPane.setDividerLocation(600);
 			frame.add(splitPane);
 
-			// 管理ようオブジェクトを生成
+			// 管理用オブジェクトを生成
 			MainManager manager = MainManager.getInstance();
 			frame.setJMenuBar(manager.getOptionMenuBar());
 			splitPane.setRightComponent(new JScrollPane(manager.getOptionPanel()));

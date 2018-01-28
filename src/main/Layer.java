@@ -5,8 +5,8 @@ import java.awt.image.BufferedImage;
 
 public class Layer {
 	private BufferedImage image;
-	private Color defaultColor;
-	private String name;
+	private Color defaultColor;		// 初期設定の色
+	private String name;			// Layerの名前
 
 	public Layer(BufferedImage image, Color defaultColor, String name){
 		this.image = image;
@@ -20,14 +20,20 @@ public class Layer {
 		g.fillRect(0, 0, width, height);
 	}
 
+	// Layerを初期設定の色で塗りつぶす
 	public void clear(){
 		Graphics2D g = image.createGraphics();
 		g.setColor(defaultColor);
 		g.fillRect(0, 0, image.getWidth(), image.getHeight());
 	}
 
+	// Layerが保持しているBufferedImageを返す
 	public BufferedImage getImage(){
 		return image;
+	}
+	// Layerが保持しているBufferedImageのGraphics2Dクラスを返す
+	public Graphics2D getGraphics2D(){
+		return getImage().createGraphics();
 	}
 
 	@Override

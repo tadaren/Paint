@@ -11,13 +11,15 @@ import pen.TrianglePen;
 import javax.swing.*;
 import java.awt.*;
 
+// 描画ペンについて管理するクラス
 public class PenManager {
 
 	private static PenManager instance;
-	private Pen pen;
-	private Color color;
-	private Stroke stroke;
+	private Pen pen;		// 現在選択されているペン
+	private Color color;	// ペンによって描画される色
+	private Stroke stroke;	// ペンの太さとか
 
+	// 使えるペン
 	private Pen[] penList = {
 			new DefaultPen(),
 			new LinePen(),
