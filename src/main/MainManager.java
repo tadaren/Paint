@@ -67,9 +67,6 @@ public class MainManager implements MouseInputListener{
 				File selectedFile = fileChooser.getSelectedFile();
 				try{
 					// キャンバスに読み込んだ画像をセットする
-//					canvas.setImage(ImageIO.read(selectedFile));
-//					canvas = new Canvas(ImageIO.read(selectedFile));
-//					canvas.setListener(this);
 					canvas.setImage(ImageIO.read(selectedFile));
 					file = selectedFile;
 					// ファイルの拡張子を切り取って格納
@@ -168,6 +165,9 @@ public class MainManager implements MouseInputListener{
 		return canvas;
 	}
 
+	public void repaint(){
+		canvas.repaint();
+	}
 
 	// マウスによるイベントを受けたらペンに描画するためのGraphics2Dクラスとイベントを送信する
 	@Override

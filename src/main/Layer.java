@@ -6,14 +6,15 @@ import java.awt.image.BufferedImage;
 public class Layer {
 	private BufferedImage image;
 	private Color defaultColor;
+	private String name;
 
-	public Layer(BufferedImage image, Color defaultColor){
+	public Layer(BufferedImage image, Color defaultColor, String name){
 		this.image = image;
 		this.defaultColor = defaultColor;
+		this.name = name;
 	}
-	public Layer(int width, int height, Color defaultColor){
-		image = new BufferedImage(width, height, BufferedImage.TYPE_4BYTE_ABGR);
-		this.defaultColor = defaultColor;
+	public Layer(int width, int height, Color defaultColor, String name){
+		this(new BufferedImage(width, height, BufferedImage.TYPE_4BYTE_ABGR), defaultColor, name);
 		Graphics2D g = image.createGraphics();
 		g.setColor(defaultColor);
 		g.fillRect(0, 0, width, height);
@@ -31,6 +32,6 @@ public class Layer {
 
 	@Override
 	public String toString(){
-		return "LayerName";
+		return "Layer"+name;
 	}
 }
