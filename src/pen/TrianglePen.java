@@ -1,5 +1,6 @@
 package pen;
 
+import main.Layer;
 import main.PenManager;
 
 import java.awt.*;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 
 public class TrianglePen extends Pen {
 
-	private ArrayList<Point> pointBuffer = new ArrayList<>();
+	protected ArrayList<Point> pointBuffer = new ArrayList<>();
 
 	@Override
 	public void init(){
@@ -16,7 +17,8 @@ public class TrianglePen extends Pen {
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent e, Graphics2D g){
+	public void mouseClicked(MouseEvent e, Layer layer, Graphics2D g1){
+		Graphics2D g = layer.getGraphics2D();
 		if(pointBuffer.size() == 2){
 			g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 			g.setColor(PenManager.getInstance().getColor());

@@ -1,5 +1,6 @@
 package pen;
 
+import main.Layer;
 import main.PenManager;
 
 import java.awt.*;
@@ -23,12 +24,13 @@ public class DefaultPen extends Pen {
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e, Graphics2D g){
+	public void mousePressed(MouseEvent e, Layer layer, Graphics2D g1){
 		pointBuffer = e.getPoint();
 	}
 
 	@Override
-	public void mouseDragged(MouseEvent e, Graphics2D g){
+	public void mouseDragged(MouseEvent e, Layer layer, Graphics2D g1){
+		Graphics2D g = layer.getGraphics2D();
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g.setColor(PenManager.getInstance().getColor());
 		g.setStroke(PenManager.getInstance().getStroke());

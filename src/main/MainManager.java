@@ -32,12 +32,6 @@ public class MainManager implements MouseInputListener{
 		initMenuBar();
 
 		optionPanel = new JPanel();
-//		optionPanel.setLayout(new BoxLayout(optionPanel, BoxLayout.Y_AXIS));
-//		JPanel p = new JPanel();
-//		optionPanel.add(p);
-
-//		canvas = new Canvas(500, 500);
-//		canvas.setListener(this);
 	}
 	private void initMenuBar(){
 		optionMenuBar = new JMenuBar();
@@ -95,10 +89,10 @@ public class MainManager implements MouseInputListener{
 					File selectedFile = fileChooser.getSelectedFile();
 					// 拡張子がなければ追加
 					if(selectedFile.getPath().endsWith(".png")){
-						ImageIO.write(getCanvas().getImage(), "png", selectedFile);
+						ImageIO.write(getCanvas().getPerfectImage(), "png", selectedFile);
 					}else{
 						selectedFile = new File(selectedFile.getPath()+".png");
-						ImageIO.write(getCanvas().getImage(), "png", selectedFile);
+						ImageIO.write(getCanvas().getPerfectImage(), "png", selectedFile);
 					}
 					file = selectedFile;
 					fileType = "png";
@@ -118,10 +112,10 @@ public class MainManager implements MouseInputListener{
 					File selectedFile = fileChooser.getSelectedFile();
 					// 拡張子がなければ追加
 					if(selectedFile.getPath().endsWith(".jpeg") || selectedFile.getPath().endsWith(".jpg")){
-						ImageIO.write(getCanvas().getImage(), "jpeg", selectedFile);
+						ImageIO.write(getCanvas().getPerfectImage(), "jpeg", selectedFile);
 					}else{
 						selectedFile = new File(selectedFile.getPath()+".jpeg");
-						ImageIO.write(getCanvas().getImage(), "jpeg", selectedFile);
+						ImageIO.write(getCanvas().getPerfectImage(), "jpeg", selectedFile);
 					}
 					file = selectedFile;
 					fileType = "jpeg";
@@ -139,7 +133,7 @@ public class MainManager implements MouseInputListener{
 			if(file == null || fileType == null)
 				return;
 			try{
-				ImageIO.write(getCanvas().getImage(), fileType, file);
+				ImageIO.write(getCanvas().getPerfectImage(), fileType, file);
 			}catch(IOException e1){
 //				e1.printStackTrace();
 			}
@@ -173,7 +167,7 @@ public class MainManager implements MouseInputListener{
 	@Override
 	public void mouseClicked(MouseEvent e){
 		try {
-			penManager.getPen().mouseClicked(e, canvas.getImage().createGraphics());
+			penManager.getPen().mouseClicked(e, canvas.getLayer(), canvas.getOverLayerImage().createGraphics());
 		} catch (NullPointerException e1) {
 //			e1.printStackTrace();
 		}
@@ -183,7 +177,7 @@ public class MainManager implements MouseInputListener{
 	@Override
 	public void mousePressed(MouseEvent e){
 		try {
-			penManager.getPen().mousePressed(e, canvas.getImage().createGraphics());
+			penManager.getPen().mousePressed(e, canvas.getLayer(), canvas.getOverLayerImage().createGraphics());
 		} catch (Exception e1) {
 //			e1.printStackTrace();
 		}
@@ -193,7 +187,7 @@ public class MainManager implements MouseInputListener{
 	@Override
 	public void mouseReleased(MouseEvent e){
 		try {
-			penManager.getPen().mouseReleased(e, canvas.getImage().createGraphics());
+			penManager.getPen().mouseReleased(e, canvas.getLayer(), canvas.getOverLayerImage().createGraphics());
 		} catch (Exception e1) {
 //			e1.printStackTrace();
 		}
@@ -203,7 +197,7 @@ public class MainManager implements MouseInputListener{
 	@Override
 	public void mouseEntered(MouseEvent e){
 		try {
-			penManager.getPen().mouseEntered(e, canvas.getImage().createGraphics());
+			penManager.getPen().mouseEntered(e, canvas.getLayer(), canvas.getOverLayerImage().createGraphics());
 		} catch (Exception e1) {
 //			e1.printStackTrace();
 		}
@@ -213,7 +207,7 @@ public class MainManager implements MouseInputListener{
 	@Override
 	public void mouseExited(MouseEvent e){
 		try {
-			penManager.getPen().mouseExited(e, canvas.getImage().createGraphics());
+			penManager.getPen().mouseExited(e, canvas.getLayer(), canvas.getOverLayerImage().createGraphics());
 		} catch (Exception e1) {
 //			e1.printStackTrace();
 		}
@@ -223,7 +217,7 @@ public class MainManager implements MouseInputListener{
 	@Override
 	public void mouseDragged(MouseEvent e){
 		try {
-			penManager.getPen().mouseDragged(e, canvas.getImage().createGraphics());
+			penManager.getPen().mouseDragged(e, canvas.getLayer(), canvas.getOverLayerImage().createGraphics());
 		} catch (Exception e1) {
 //			e1.printStackTrace();
 		}
@@ -233,7 +227,7 @@ public class MainManager implements MouseInputListener{
 	@Override
 	public void mouseMoved(MouseEvent e){
 		try {
-			penManager.getPen().mouseMoved(e, canvas.getImage().createGraphics());
+			penManager.getPen().mouseMoved(e, canvas.getLayer(), canvas.getOverLayerImage().createGraphics());
 		} catch (Exception e1) {
 //			e1.printStackTrace();
 		}

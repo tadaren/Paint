@@ -3,10 +3,12 @@ package main;
 import pen.DefaultPen;
 import pen.Eraser;
 import pen.LinePen;
+import pen.LinePenNew;
 import pen.Pen;
 import pen.RainbowPen;
 import pen.StringPen;
 import pen.TrianglePen;
+import pen.TrianglePenNew;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,12 +20,15 @@ public class PenManager {
 	private Pen pen;		// 現在選択されているペン
 	private Color color;	// ペンによって描画される色
 	private Stroke stroke;	// ペンの太さとか
+	private Stroke tempStroke = new BasicStroke(3, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 10, new float[]{5.0f}, 0);
 
 	// 使えるペン
 	private Pen[] penList = {
 			new DefaultPen(),
 			new LinePen(),
+			new LinePenNew(),
 			new TrianglePen(),
+			new TrianglePenNew(),
 			new RainbowPen(),
 			new StringPen(),
 			new Eraser()
@@ -57,10 +62,6 @@ public class PenManager {
 			Pen p = (Pen)((JComboBox<?>)e.getSource()).getSelectedItem();
 			setPen(p);
 		});
-//		JMenu penListMenu = new JMenu("Pen");
-//		penListMenu.add(penList);
-//		penListMenu.add(new JPanel());
-//		MainManager.getInstance().getOptionMenuBar().add(penListMenu);
 		MainManager.getInstance().getOptionPanel().add(penList);
 	}
 
@@ -75,6 +76,9 @@ public class PenManager {
 	}
 	public Pen[] getPenList(){
 		return penList;
+	}
+	public Stroke getTempStroke(){
+		return tempStroke;
 	}
 
 	public void setPen(Pen pen){

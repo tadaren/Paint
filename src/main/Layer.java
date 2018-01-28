@@ -35,6 +35,9 @@ public class Layer {
 	public Graphics2D getGraphics2D(){
 		return getImage().createGraphics();
 	}
+	public Color getDefaultColor(){
+		return defaultColor;
+	}
 
 	@Override
 	public String toString(){
