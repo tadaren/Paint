@@ -17,7 +17,7 @@ public class MainManager implements MouseInputListener{
 
 	private JPanel optionPanel;			// 右端の設定用の色々を表示するパネル
 	private JMenuBar optionMenuBar;		// MenuBarのインスタンス
-	private Canvas canvas;	// ペイント領域のパネル
+	private Canvas canvas;				// ペイント領域のパネル
 	private JFileChooser fileChooser = new JFileChooser();	// 保存とか読み込み用のFileChooser
 	private PenManager penManager;		// ペン管理用
 
@@ -42,9 +42,10 @@ public class MainManager implements MouseInputListener{
 		JMenuItem newMenu = new JMenuItem("New");		// 新規作成のメニュー
 		newMenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 		newMenu.addActionListener(e -> {
+			if(canvas.getLayerCount() != 0){
+				return;
+			}
 			canvas.generate(500, 500);
-//			canvas.generateImage(500, 500);
-//			canvas.setListener(this);
 			PenManager.getInstance().getPen().init();
 		});
 		fileMenu.add(newMenu);
@@ -62,6 +63,7 @@ public class MainManager implements MouseInputListener{
 				try{
 					// キャンバスに読み込んだ画像をセットする
 					canvas.setImage(ImageIO.read(selectedFile));
+					canvas.repaint();
 					file = selectedFile;
 					// ファイルの拡張子を切り取って格納
 					fileType = file.getPath().substring(file.getPath().lastIndexOf(".")+1);

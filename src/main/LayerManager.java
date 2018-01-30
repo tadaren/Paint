@@ -24,7 +24,7 @@ public class LayerManager {
 	// Windowを生成
 	private void createSettingWindow(){
 		frame = new JFrame("Layer");
-		frame.setBounds(700, 0, 330, 500);
+		frame.setBounds(1000, 0, 330, 500);
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		frame.add(panel);
@@ -42,20 +42,28 @@ public class LayerManager {
 		up.addActionListener(e -> {
 			if(layerList.getSize() <= 1)
 				return;
-			Layer buf = layerJList.getSelectedValue();
-			int i = layerJList.getSelectedIndex();
-			layerList.set(i, layerList.get(i+1));
-			layerList.set(i+1, buf);
+			try{
+				Layer buf = layerJList.getSelectedValue();
+				int i = layerJList.getSelectedIndex();
+				layerList.set(i, layerList.get(i+1));
+				layerList.set(i+1, buf);
+			}catch(ArrayIndexOutOfBoundsException e1){
+//				e1.printStackTrace();
+			}
 		});
 		buttonPanel.add(up);
 		JButton down = new JButton("Down");	// 現在のLayerを下に移動させる
 		down.addActionListener(e -> {
 			if(layerList.getSize() <= 1)
 				return;
-			Layer buf = layerJList.getSelectedValue();
-			int i = layerJList.getSelectedIndex();
-			layerList.set(i, layerList.get(i-1));
-			layerList.set(i-1, buf);
+			try{
+				Layer buf = layerJList.getSelectedValue();
+				int i = layerJList.getSelectedIndex();
+				layerList.set(i, layerList.get(i-1));
+				layerList.set(i-1, buf);
+			}catch(ArrayIndexOutOfBoundsException e1){
+//				e1.printStackTrace();
+			}
 		});
 		buttonPanel.add(down);
 		JButton delete = new JButton("Delete");	// 現在のLayerを削除
@@ -85,7 +93,7 @@ public class LayerManager {
 	}
 	// 引数の画像によるLayerを追加(最初のLayerのみ)
 	public void addImage(BufferedImage image){
-		if(layerList.getSize() == 0){
+		if(layerList.getSize() != 0){
 			return;
 		}
 		if(layerList.getSize() == 0){
@@ -109,6 +117,10 @@ public class LayerManager {
 		}catch(Exception e){
 			return null;
 		}
+	}
+	// 現在あるLayerの数を返す
+	public int getLayerCount(){
+		return layerCount;
 	}
 	// 全てのLayerを重ねたBufferedImageを返す
 	public BufferedImage getImage(){

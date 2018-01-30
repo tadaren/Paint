@@ -63,6 +63,24 @@ public class PenManager {
 			setPen(p);
 		});
 		MainManager.getInstance().getOptionPanel().add(penList);
+
+		// MenuBarでのペン選択
+		JMenu penMenu = new JMenu("Pen");
+		ButtonGroup g = new ButtonGroup();
+		for(Pen pen: getPenList()){
+			PenRadioButton p = new PenRadioButton(pen);
+			g.add(p);
+			penMenu.add(p);
+			// Penのボタンを押されたらPenを変更する
+			p.addActionListener(e -> {
+				setPen(p.getPen());
+				penList.setSelectedItem(p.getPen());
+			});
+			if(pen == getPenList()[0]){
+				p.setSelected(true);
+			}
+		}
+		MainManager.getInstance().getOptionMenuBar().add(penMenu);
 	}
 
 	public Pen getPen(){

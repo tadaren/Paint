@@ -36,6 +36,9 @@ public class Canvas extends JPanel{
 	public BufferedImage getPerfectImage(){
 		return layer.getImage();
 	}
+	public int getLayerCount(){
+		return layer.getLayerCount();
+	}
 
 	public void generate(int width, int height){
 		layer.addLayer(width, height, Color.WHITE);
