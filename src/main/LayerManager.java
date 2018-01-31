@@ -19,6 +19,13 @@ public class LayerManager {
 		JMenuItem visibleLayerList = new JMenuItem("LayerWindow");
 		visibleLayerList.addActionListener(e -> frame.setVisible(true));
 		layerMenu.add(visibleLayerList);
+
+		// Layer操作Windowを表示させるメニュー
+		JMenu menu = new JMenu("Layer");
+		JMenuItem showWindow = new JMenuItem("Show");
+		showWindow.addActionListener(e -> frame.setVisible(true));
+		menu.add(showWindow);
+		MainManager.getInstance().getOptionMenuBar().add(menu);
 	}
 
 	// Windowを生成
@@ -68,12 +75,19 @@ public class LayerManager {
 		buttonPanel.add(down);
 		JButton delete = new JButton("Delete");	// 現在のLayerを削除
 		delete.addActionListener(e -> {
+			if(layerList.getSize() == 0){
+				return;
+			}
 			removeLayer(layerJList.getSelectedIndex());
 		});
 		buttonPanel.add(delete);
 		JButton add = new JButton("Add");		// 新たにLayerを作成
 		add.addActionListener(e -> {
-			addLayer(width, height, new Color(0, 0, 0, 0));
+			try{
+				addLayer(width, height, new Color(0, 0, 0, 0));
+			}catch(IllegalArgumentException e1){
+				addLayer(500, 500, Color.WHITE);
+			}
 		});
 		buttonPanel.add(add);
 
@@ -96,10 +110,8 @@ public class LayerManager {
 		if(layerList.getSize() != 0){
 			return;
 		}
-		if(layerList.getSize() == 0){
-			this.width = image.getWidth();
-			this.height = image.getHeight();
-		}
+		this.width = image.getWidth();
+		this.height = image.getHeight();
 		Layer newLayer = new Layer(image, new Color(0,0,0,0), String.valueOf(layerCount++));
 		layerList.addElement(newLayer);
 		layerJList.setSelectedValue(newLayer, true);

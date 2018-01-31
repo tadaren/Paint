@@ -1,6 +1,7 @@
 package main;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Main {
 	public static void main(String[] args){
@@ -9,19 +10,17 @@ public class Main {
 			JFrame frame = new JFrame("Paint");
 			frame.setBounds(100,100, 800, 800);
 			frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-			JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
-			splitPane.setDividerLocation(600);
-			frame.add(splitPane);
 
 			// 管理用オブジェクトを生成
 			MainManager manager = MainManager.getInstance();
 			frame.setJMenuBar(manager.getOptionMenuBar());
-			splitPane.setRightComponent(new JScrollPane(manager.getOptionPanel()));
+			frame.add(manager.getOptionPanel(), BorderLayout.EAST);
 			manager.setPenManager(PenManager.getInstance());
 
 			// キャンバス描画エリアを設定
+			manager.setCanvas(new Canvas());
 			JScrollPane canvasArea = new JScrollPane(manager.getCanvas(), JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-			splitPane.setLeftComponent(canvasArea);
+			frame.add(canvasArea, BorderLayout.CENTER);
 			frame.setVisible(true);
 		});
 	}

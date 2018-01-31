@@ -16,43 +16,14 @@ public class StringPen extends Pen {
 
 	private int fontSize = 30;
 	private String fontName = "ヒラギノ角ゴ StdN";
-	private String drawString = "";
-
-	private JPanel option;
-
-	public StringPen(){
-		option = new JPanel();
-		JTextField textField = new JTextField(10);
-		textField.getDocument().addDocumentListener(new DocumentListener() {
-			@Override
-			public void insertUpdate(DocumentEvent e){
-				change(e);
-			}
-			@Override
-			public void removeUpdate(DocumentEvent e){
-				change(e);
-			}
-			@Override
-			public void changedUpdate(DocumentEvent e){
-				change(e);
-			}
-			private void change(DocumentEvent e){
-				Document d = e.getDocument();
-				try{
-					drawString = d.getText(0, d.getLength());
-				}catch(BadLocationException e1){
-					e1.printStackTrace();
-				}
-			}
-		});
-		option.add(textField);
-		JScrollBar fontSizeBar = new JScrollBar(JScrollBar.HORIZONTAL, 30, 2, 5, 50);
-		fontSizeBar.addAdjustmentListener(e -> fontSize = e.getValue());
-		option.add(fontSizeBar);
-	}
+	private String drawString;
 
 	@Override
 	public void mouseClicked(MouseEvent e, Layer layer, Graphics2D g1){
+		drawString = JOptionPane.showInputDialog("入力する文字列");
+		if(drawString == null){
+			return;
+		}
 		Graphics2D g = layer.getGraphics2D();
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g.setColor(PenManager.getInstance().getColor());
@@ -61,9 +32,7 @@ public class StringPen extends Pen {
 	}
 
 	@Override
-	public void init(){
-		MainManager.getInstance().getOptionPanel().add(option).repaint();
-	}
+	public void init(){}
 
 	@Override
 	public String toString(){

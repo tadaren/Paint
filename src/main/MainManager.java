@@ -26,8 +26,6 @@ public class MainManager implements MouseInputListener{
 	private String fileType;
 
 	private MainManager(){
-		canvas = new Canvas();
-		canvas.setListener(this);
 		fileChooser.setAcceptAllFileFilterUsed(false);
 		initMenuBar();
 
@@ -159,6 +157,10 @@ public class MainManager implements MouseInputListener{
 	}
 	public Canvas getCanvas(){
 		return canvas;
+	}
+	public void setCanvas(Canvas canvas){
+		this.canvas = canvas;
+		canvas.setListener(this);
 	}
 
 	public void repaint(){

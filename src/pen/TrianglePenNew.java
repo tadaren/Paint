@@ -29,6 +29,12 @@ public class TrianglePenNew extends TrianglePen{
 	}
 
 	@Override
+	public void mouseExited(MouseEvent e, Layer layer, Graphics2D g1){
+		g1.setBackground(new Color(0,0,0,0));
+		g1.clearRect(0,0,1000,1000);
+	}
+
+	@Override
 	public String toString(){
 		return "TrianglePenNew";
 	}
