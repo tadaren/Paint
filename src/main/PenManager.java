@@ -41,10 +41,30 @@ public class PenManager {
 
 		// 色選択メニュー
 		JMenu colorMenu = new JMenu("Color");
-		JColorChooser colorChooser = new JColorChooser();
-		colorChooser.setColor(Color.BLACK);
-		colorChooser.getSelectionModel().addChangeListener(e -> setColor(colorChooser.getColor()));
-		colorMenu.add(colorChooser);
+		JMenuItem black = new JMenuItem("Black");
+		colorMenu.add(black);
+		black.addActionListener(e -> {
+			color = Color.BLACK;
+		});
+		JMenuItem red = new JMenuItem("Red");
+		colorMenu.add(red);
+		red.addActionListener(e -> {
+			color = Color.RED;
+		});
+		JMenuItem blue = new JMenuItem("Blue");
+		colorMenu.add(blue);
+		blue.addActionListener(e -> {
+			color = Color.BLUE;
+		});
+		JMenuItem other = new JMenuItem("Other");
+		colorMenu.add(other);
+		other.addActionListener(e -> {
+			Color selectedColor = JColorChooser.showDialog(null, "Color", color);
+			if(selectedColor != null){
+				color = selectedColor;
+			}
+		});
+
 		MainManager.getInstance().getOptionMenuBar().add(colorMenu);
 
 		// ペンサイズ設定メニュー

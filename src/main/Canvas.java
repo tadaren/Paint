@@ -12,6 +12,7 @@ public class Canvas extends JPanel{
 	public Canvas(){
 		this.setBackground(new Color(111,111,111));
 		overLayerImage = new BufferedImage(1000, 1000, BufferedImage.TYPE_4BYTE_ABGR);
+		this.layer.addLayer(500,500, Color.WHITE);
 	}
 
 	// 描画領域を初期化する

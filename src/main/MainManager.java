@@ -59,6 +59,10 @@ public class MainManager implements MouseInputListener{
 			if(fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
 				File selectedFile = fileChooser.getSelectedFile();
 				try{
+					if(canvas.getLayerCount() != 0){
+						JOptionPane.showMessageDialog(null, "Layerが0個の時のみ読み込めます");
+						return;
+					}
 					// キャンバスに読み込んだ画像をセットする
 					canvas.setImage(ImageIO.read(selectedFile));
 					canvas.repaint();
